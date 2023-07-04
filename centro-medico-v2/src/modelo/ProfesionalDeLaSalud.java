@@ -7,4 +7,6 @@ public abstract class ProfesionalDeLaSalud extends Persona implements IProfesion
     public ProfesionalDeLaSalud(String dni, String nombre, String telefono) {
         super(dni, nombre, telefono);
     }
+
+
 }
