@@ -1,6 +1,7 @@
 import modelo.impl.Enfermera;
 import modelo.impl.Medico;
 import modelo.impl.Paciente;
+import modelo.impl.Paramedico;
 import persistencia.IObjetoDeAcessoADatos;
 import persistencia.impl.ObjetoDeAccesoADatos;
 
@@ -29,5 +30,11 @@ public class Main {
 
         System.out.println(baseDeDatos.guardarEnfermera(enfermera1));
         System.out.println(baseDeDatos.guardarEnfermera(enfermera2));
+
+        Paramedico paramedico1 = new Paramedico("789", "Paramédico", "555-655-555");
+        Paramedico paramedico2 = new Paramedico("789", "Paramédico", "555-655-555");
+
+        System.out.println(baseDeDatos.guardarParamedico(paramedico1));
+        System.out.println(baseDeDatos.guardarParamedico(paramedico2));
     }
 }
