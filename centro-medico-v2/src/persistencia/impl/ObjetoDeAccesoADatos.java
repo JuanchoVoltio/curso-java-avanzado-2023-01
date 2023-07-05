@@ -3,18 +3,18 @@ package persistencia.impl;
 import modelo.IPaciente;
 import modelo.impl.Enfermera;
 import modelo.impl.Medico;
+import modelo.impl.Paciente;
 import modelo.impl.Paramedico;
 import persistencia.IObjetoDeAcessoADatos;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 public class ObjetoDeAccesoADatos implements IObjetoDeAcessoADatos {
 
-    private final List<Medico> medicos = new ArrayList<>();
-    private final List<IPaciente> pacientes = new ArrayList<>();
-    private final List<Enfermera> enfermeras = new ArrayList<>();
+    private List<Medico> medicos = new ArrayList<>();
+    private List<Paciente> pacientes = new ArrayList<>();
+    private List<Enfermera> enfermeras = new ArrayList<>();
     private final List<Paramedico> paramedicos = new ArrayList<>();
 
 
@@ -26,6 +26,8 @@ public class ObjetoDeAccesoADatos implements IObjetoDeAcessoADatos {
             this.medicos.add(m);
             respuesta = true;
         }
+
+        System.err.println(respuesta);
 
         return respuesta;
 
@@ -42,16 +44,19 @@ public class ObjetoDeAccesoADatos implements IObjetoDeAcessoADatos {
     }
 
     @Override
-    public boolean guardarPaciente(IPaciente p) {
+    public boolean guardarPaciente(Paciente p) {
         if (!this.pacientes.contains(p)){
             this.pacientes.add(p);
             return true;
         }
+
+        System.err.println("El paciente " + p + " está duplicado.");
         return false;
     }
 
     @Override
     public boolean guardarEnfermera(Enfermera e) {
+        //TODO: Implementar usando Set en vez de List
         if (!this.enfermeras.contains(e)){
             this.enfermeras.add(e);
             return true;
@@ -69,22 +74,22 @@ public class ObjetoDeAccesoADatos implements IObjetoDeAcessoADatos {
     }
 
     @Override
-    public Collection<IPaciente> consultarPacientes() {
-        return new ArrayList<>(this.pacientes);
+    public List<Medico> consultarMedicos() {
+        return List.copyOf(this.medicos);
     }
 
     @Override
-    public Collection<Medico> consultarMedicos() {
-        return new ArrayList<>(this.medicos);
+    public List<Paciente> consultarPacientes() {
+        return List.copyOf(this.pacientes);
     }
 
     @Override
-    public Collection<Enfermera> consultarEnfermeras() {
-        return new ArrayList<>(this.enfermeras);
+    public List<Enfermera> consultarEnfermeras() {
+        return List.copyOf(this.enfermeras);
     }
 
     @Override
-    public Collection<Paramedico> consultarParamedicos() {
-        return new ArrayList<>(this.paramedicos);
+    public List<Paramedico> consultarParamedicos() {
+        return List.copyOf(this.paramedicos);
     }
 }

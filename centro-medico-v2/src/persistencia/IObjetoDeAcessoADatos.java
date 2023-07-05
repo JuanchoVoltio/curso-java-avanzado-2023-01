@@ -1,68 +1,65 @@
 package persistencia;
 
-import modelo.IPaciente;
 import modelo.impl.Enfermera;
 import modelo.impl.Medico;
+import modelo.impl.Paciente;
 import modelo.impl.Paramedico;
 
-import java.util.Collection;
+import java.util.List;
 
 public interface IObjetoDeAcessoADatos { //Data Access Object
 
     /**
-     *
-     * @param m El médico que se quiere guardar
-     * @return true si guardó el médico, false si el médico ya estaba registrado,
-     *         en cuyo caso {@code m} no será guardado.
+     * Guarda un nuevo médico en el sistema.
+     * @param m El {@link Medico} que se quiere guardar
+     * @return true si guardó el médico, false si el médico ya estaba registrado, en cuyo caso {@code m} no será guardado.
      */
     boolean guardarMedico(Medico m);
 
     /**
-     *
-     * @param p El paciente que se quiere guardar
-     * @return true si guardó el paciente, false si el paciente ya estaba registrado,
-     *         en cuyo caso {@code p} no será guardado.
+     * Guarda un nuevo paciente en el sistema.
+     * @param p El {@link Paciente} que se quiere guardar
+     * @return true si se guardó el paciente, false si el paciente ya estaba registrado, en cuyo caso, {@code p} no será guardado.
      */
-    boolean guardarPaciente(IPaciente p);
+    boolean guardarPaciente(Paciente p);
 
     /**
-     *
-     * @param e La enfermera que se quiere guardar
-     * @return true si guardó la enfermera, false si la enferemera ya estaba registrada,
-     *         en cuyo caso {@code p} no será guardado.
+     * Guarda una nueva enfermera en el sistema.
+     * @param e La {@link Enfermera} que se quiere guardar
+     * @return true si se guardó la enfermera, false si la enfermera ya estaba registrada, en cuyo caso, {@code e} no será guardada.
      */
     boolean guardarEnfermera(Enfermera e);
 
     /**
-     *
-     * @param pm El paramédico que se quiere guardar
-     * @return true si guardó el paramédico, false si ya estaba registrada,
-     *         en cuyo caso {@code p} no será guardado.
+     * Guarda un nuevo paramédico en el sistema.
+     * @param p El paramédico que se quiere guardar
+     * @return true si guardó el paramédico, false si ya estaba registrado, en cuyo caso {@code p} no será guardado.
      */
-    boolean guardarParamedico(Paramedico pm);
-
-    /**
-     * Obtiene los pacientes registrados en el sistema.
-     * @return todos los pacientes
-     */
-    Collection<IPaciente> consultarPacientes();
+    boolean guardarParamedico(Paramedico p);
 
     /**
      * Obtiene los médicos registrados en el sistema.
-     * @return todos los médicos
+     * @return una @{@link List} inmodificable de objetos {@link Medico}.
      */
-    Collection<Medico> consultarMedicos();
+    List<Medico> consultarMedicos();
+
+    /**
+     * Obtiene los pacientes registrados en el sistema.
+     * @return una @{@link List} inmodificable de objetos {@link Paciente}.
+     */
+    List<Paciente> consultarPacientes();
 
     /**
      * Obtiene las enfermeras registradas en el sistema.
-     * @return todas las enfermeras
+     * @return una @{@link List} inmodificable de objetos {@link Enfermera}.
      */
-    Collection<Enfermera> consultarEnfermeras();
+    List<Enfermera> consultarEnfermeras();
 
     /**
-     * Obtiene los paramedicos registrados en el sistema.
-     * @return todos los paramedicos
+     * Obtiene los paramédicos registrados en el sistema.
+     * @return una @{@link List} inmodificable de objetos {@link Paramedico}.
      */
-    Collection<Paramedico> consultarParamedicos();
+    List<Paramedico> consultarParamedicos();
 
+    //TODO: Completar los otros métodos.
 }
