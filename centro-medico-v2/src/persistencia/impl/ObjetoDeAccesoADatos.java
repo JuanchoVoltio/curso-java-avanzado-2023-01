@@ -1,16 +1,19 @@
 package persistencia.impl;
 
+import modelo.impl.Enfermera;
 import modelo.impl.Medico;
 import modelo.impl.Paciente;
 import persistencia.IObjetoDeAcessoADatos;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 public class ObjetoDeAccesoADatos implements IObjetoDeAcessoADatos {
 
     private List<Medico> medicos = new ArrayList<>();
     private List<Paciente> pacientes = new ArrayList<>();
+    private List<Enfermera> enfermeras = new ArrayList<>();
 
 
     @Override
@@ -50,5 +53,26 @@ public class ObjetoDeAccesoADatos implements IObjetoDeAcessoADatos {
         System.err.println(respuesta);
 
         return respuesta;
+    }
+
+    @Override
+    public boolean guardarEnfermera(Enfermera e) {
+        //TODO: Implementar usando Set en vez de List
+        return false;
+    }
+
+    @Override
+    public List<Medico> consultarMedicos() {
+        return List.copyOf(this.medicos);
+    }
+
+    @Override
+    public List<Paciente> consultarPacientes() {
+        return List.copyOf(this.pacientes);
+    }
+
+    @Override
+    public List<Enfermera> consultarEnfermeras() {
+        return List.copyOf(this.enfermeras);
     }
 }
