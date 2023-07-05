@@ -25,8 +25,6 @@ public class ObjetoDeAccesoADatos implements IObjetoDeAcessoADatos {
             respuesta = true;
         }
 
-        System.err.println(respuesta);
-
         return respuesta;
 
 //        Implementación básica usando ciclos.
@@ -49,8 +47,6 @@ public class ObjetoDeAccesoADatos implements IObjetoDeAcessoADatos {
             this.pacientes.add(p);
             respuesta = true;
         }
-
-        System.err.println(respuesta);
 
         return respuesta;
     }

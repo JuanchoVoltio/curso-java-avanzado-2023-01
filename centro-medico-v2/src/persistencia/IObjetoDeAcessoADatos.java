@@ -11,7 +11,7 @@ public interface IObjetoDeAcessoADatos { //Data Access Object
     /**
      *
      * @param m El {@link Medico} que se quiere guardar
-     * @return true si guardó el médico, false si el médico ya estaba registrado, en cuyo caso m no será guardado.
+     * @return true si guard&oacute; el m&eacute;dico, false si el m&eacute;dico ya estaba registrado, en cuyo caso m no ser&aacute; guardado.
      */
     boolean guardarMedico(Medico m);
 

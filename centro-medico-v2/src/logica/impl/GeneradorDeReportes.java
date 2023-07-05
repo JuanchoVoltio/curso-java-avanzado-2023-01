@@ -1,7 +1,11 @@
 package logica.impl;
 
 import logica.IGeneradorDeReportes;
+import modelo.impl.Medico;
 import persistencia.IObjetoDeAcessoADatos;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class GeneradorDeReportes implements IGeneradorDeReportes {
 
@@ -13,13 +17,24 @@ public class GeneradorDeReportes implements IGeneradorDeReportes {
 
     @Override
     public String generarReporteDeMedicos() {
-        return null;
+        List<Medico> medicos = baseDeDatos.consultarMedicos();
+
+        return this.aplicarPlantillaDeReporteDeMedicos(medicos);
     }
 
     @Override
     public String generarReporteDeMedicosPorEspecialidad(String especialidad) {
-        //TODO: implementar este método usando programación imperativa
-        return null;
+        //Implementando este método usando programación imperativa
+        List<Medico> medicos = baseDeDatos.consultarMedicos();
+        List<Medico> medicosFiltrados = new ArrayList<>();
+
+        for (Medico m : medicos){
+            if (m.getEspecialidad().equals(especialidad)){
+                medicosFiltrados.add(m);
+            }
+        }
+
+       return this.aplicarPlantillaDeReporteDeMedicos(medicosFiltrados);
     }
 
     @Override
@@ -31,5 +46,17 @@ public class GeneradorDeReportes implements IGeneradorDeReportes {
     public String generarReporteDePacientesPorGrupoSanguineo() {
         //TODO: implementar este método usando streams y programación funcional
         return null;
+    }
+
+    private String aplicarPlantillaDeReporteDeMedicos(List<Medico> datos){
+        StringBuilder reporte = new StringBuilder("-- LISTADO DE MÉDICOS --\n------------------\n|   Nombre   | Especialidad |\n");
+
+        for(Medico m : datos){
+            reporte.append("| " + m.getNombre() + "  | " + m.getEspecialidad() + " |\n");
+        }
+
+        reporte.append("---------------------------------\n");
+
+        return reporte.toString();
     }
 }
