@@ -1,6 +1,7 @@
 package persistencia.impl;
 
 import modelo.impl.Medico;
+import modelo.impl.Paciente;
 import persistencia.IObjetoDeAcessoADatos;
 
 import java.util.ArrayList;
@@ -9,6 +10,7 @@ import java.util.List;
 public class ObjetoDeAccesoADatos implements IObjetoDeAcessoADatos {
 
     private List<Medico> medicos = new ArrayList<>();
+    private List<Paciente> pacientes = new ArrayList<>();
 
 
     @Override
@@ -19,6 +21,8 @@ public class ObjetoDeAccesoADatos implements IObjetoDeAcessoADatos {
             this.medicos.add(m);
             respuesta = true;
         }
+
+        System.err.println(respuesta);
 
         return respuesta;
 
@@ -32,5 +36,19 @@ public class ObjetoDeAccesoADatos implements IObjetoDeAcessoADatos {
 //        this.medicos.add(m);
 //
 //        return true;
+    }
+
+    @Override
+    public boolean guardarPaciente(Paciente p) {
+        boolean respuesta = false;
+
+        if(!this.pacientes.contains(p)){
+            this.pacientes.add(p);
+            respuesta = true;
+        }
+
+        System.err.println(respuesta);
+
+        return respuesta;
     }
 }
