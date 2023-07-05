@@ -2,8 +2,10 @@ package logica.impl;
 
 import logica.IGeneradorDeReportes;
 import modelo.impl.Medico;
+import modelo.impl.Paciente;
 import persistencia.IObjetoDeAcessoADatos;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -52,17 +54,20 @@ public class GeneradorDeReportes implements IGeneradorDeReportes {
 
     @Override
     public String generarReporteDePacientes() {
-        //TODO: implementar este método usando streams y programación funcional
-        return null;
+        List<Paciente> pacientes = baseDeDatos.consultarPacientes();
+        return aplicarPlantillaDeReporteDePacientes(pacientes);
     }
 
     @Override
     public String generarReporteDePacientesPorGrupoSanguineo(final String grupoSanguineo) {
-        //TODO: implementar este método usando streams y programación funcional
-        return null;
+        List<Paciente> pacientes = baseDeDatos.consultarPacientes()
+                .stream()
+                .filter((Paciente p) -> Objects.equals(p.getGrupoSanguineo(), grupoSanguineo))
+                .collect(Collectors.toList());
+        return aplicarPlantillaDeReporteDePacientes(pacientes);
     }
 
-    private String aplicarPlantillaDeReporteDeMedicos(final List<Medico> datos){
+    private String aplicarPlantillaDeReporteDeMedicos(final Collection<Medico> datos){
         StringBuilder reporte = new StringBuilder("-- LISTADO DE MÉDICOS --\n")
                 .append("------------------\n")
                 .append("|   Nombre   | Especialidad |\n");
@@ -71,6 +76,23 @@ public class GeneradorDeReportes implements IGeneradorDeReportes {
             reporte.append("| ")
                     .append(m.getNombre()).append(" | ")
                     .append(m.getEspecialidad()).append(" |\n");
+        }
+
+        reporte.append("---------------------------------\n");
+
+        return reporte.toString();
+    }
+
+    protected String aplicarPlantillaDeReporteDePacientes(final Collection<Paciente> datos){
+        StringBuilder reporte = new StringBuilder("-- LISTADO DE PACIENTES --\n")
+                .append("------------------\n")
+                .append("|   Nombre   |  Teléfono  | Grupo Sanguíneo |\n");
+
+        for (Paciente p : datos) {
+            reporte.append("| ")
+                    .append(p.getNombre()).append(" | ")
+                    .append(p.getTelefono()).append(" | ")
+                    .append(p.getGrupoSanguineo()).append(" |\n");
         }
 
         reporte.append("---------------------------------\n");

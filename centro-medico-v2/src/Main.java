@@ -1,12 +1,14 @@
 import logica.IGeneradorDeReportes;
 import logica.impl.GeneradorDeReportes;
 import modelo.impl.Medico;
+import modelo.impl.Paciente;
 import persistencia.IObjetoDeAcessoADatos;
 import persistencia.impl.ObjetoDeAccesoADatos;
 
 public class Main {
     public static void main(String[] args) {
         probarBaseDeDatos();
+        probarBaseDeDatosConPacientes();
     }
 
     public static void probarBaseDeDatos(){
@@ -24,5 +26,23 @@ public class Main {
         System.out.println(generadorDeReportes.generarReporteDeMedicos());
 
         System.out.println(generadorDeReportes.generarReporteDeMedicosPorEspecialidad(Medico.ESPECIALIDAD_GENERALISTA));
+    }
+
+    public static void probarBaseDeDatosConPacientes(){
+        //En esta prueba esperamos que no se puedan guardar registros duplicados.
+        IObjetoDeAcessoADatos baseDeDatos = new ObjetoDeAccesoADatos();
+        IGeneradorDeReportes generadorDeReportes = new GeneradorDeReportes(baseDeDatos);
+
+        Paciente p1 = new Paciente("123", "Paciente 1", "321", "A+");
+        Paciente p2 = new Paciente("124", "Paciente 2", "322", "A+");
+        Paciente p3 = new Paciente("125", "Paciente 3", "323", "A-");
+
+        baseDeDatos.guardarPaciente(p1);
+        baseDeDatos.guardarPaciente(p2);
+        baseDeDatos.guardarPaciente(p3);
+
+        System.out.println(generadorDeReportes.generarReporteDePacientes());
+
+        System.out.println(generadorDeReportes.generarReporteDePacientesPorGrupoSanguineo("A+"));
     }
 }
