@@ -1,4 +1,5 @@
 import modelo.impl.Medico;
+import modelo.impl.Paciente;
 import persistencia.IObjetoDeAcessoADatos;
 import persistencia.impl.ObjetoDeAccesoADatos;
 
@@ -15,5 +16,11 @@ public class Main {
 
         System.out.println(baseDeDatos.guardarMedico(m));
         System.out.println(baseDeDatos.guardarMedico(m2));
+
+        Paciente paciente1 = new Paciente("123", "Paciente", "555-555-555");
+        Paciente paciente2 = new Paciente("123", "Paciente", "555-555-555");
+
+        System.out.println(baseDeDatos.guardarPaciente(paciente1));
+        System.out.println(baseDeDatos.guardarPaciente(paciente2));
     }
 }
