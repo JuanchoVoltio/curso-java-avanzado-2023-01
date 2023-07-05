@@ -6,6 +6,7 @@ import persistencia.IObjetoDeAcessoADatos;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class GeneradorDeReportes implements IGeneradorDeReportes {
 
@@ -22,19 +23,28 @@ public class GeneradorDeReportes implements IGeneradorDeReportes {
         return this.aplicarPlantillaDeReporteDeMedicos(medicos);
     }
 
+//    @Override
+//    public String generarReporteDeMedicosPorEspecialidad(String especialidad) {
+//        //Implementando este método usando programación imperativa
+//        List<Medico> medicos = baseDeDatos.consultarMedicos();
+//        List<Medico> medicosFiltrados = new ArrayList<>();
+//
+//        for (Medico m : medicos){
+//            if (m.getEspecialidad().equals(especialidad)){
+//                medicosFiltrados.add(m);
+//            }
+//        }
+//
+//       return this.aplicarPlantillaDeReporteDeMedicos(medicosFiltrados);
+//    }
+
     @Override
     public String generarReporteDeMedicosPorEspecialidad(String especialidad) {
-        //Implementando este método usando programación imperativa
+        //Implementando este método usando programación funcional
         List<Medico> medicos = baseDeDatos.consultarMedicos();
-        List<Medico> medicosFiltrados = new ArrayList<>();
+        List<Medico> medicosFiltrados = medicos.stream().filter((Medico m) -> m.getEspecialidad().equals(especialidad)).collect(Collectors.toList());
 
-        for (Medico m : medicos){
-            if (m.getEspecialidad().equals(especialidad)){
-                medicosFiltrados.add(m);
-            }
-        }
-
-       return this.aplicarPlantillaDeReporteDeMedicos(medicosFiltrados);
+        return this.aplicarPlantillaDeReporteDeMedicos(medicosFiltrados);
     }
 
     @Override
