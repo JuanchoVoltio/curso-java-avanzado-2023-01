@@ -4,8 +4,8 @@ import logica.IGeneradorDeReportes;
 import modelo.impl.Medico;
 import persistencia.IObjetoDeAcessoADatos;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class GeneradorDeReportes implements IGeneradorDeReportes {
@@ -30,7 +30,7 @@ public class GeneradorDeReportes implements IGeneradorDeReportes {
 //        List<Medico> medicosFiltrados = new ArrayList<>();
 //
 //        for (Medico m : medicos){
-//            if (m.getEspecialidad().equals(especialidad)){
+//            if (Objects.equals(m.getEspecialidad(), especialidad)){
 //                medicosFiltrados.add(m);
 //            }
 //        }
@@ -39,16 +39,20 @@ public class GeneradorDeReportes implements IGeneradorDeReportes {
 //    }
 
     @Override
-    public String generarReporteDeMedicosPorEspecialidad(String especialidad) {
-        //Implementando este método usando programación funcional
+    public String generarReporteDeMedicosPorEspecialidad(final String especialidad) {
+        // Implementando este método usando programación funcional
         List<Medico> medicos = baseDeDatos.consultarMedicos();
-        List<Medico> medicosFiltrados = medicos.stream().filter((Medico m) -> m.getEspecialidad().equals(especialidad)).collect(Collectors.toList());
+        List<Medico> medicosFiltrados = medicos
+                .stream()
+                .filter((Medico m) -> Objects.equals(m.getEspecialidad(), especialidad))
+                .collect(Collectors.toList());
 
         return this.aplicarPlantillaDeReporteDeMedicos(medicosFiltrados);
     }
 
     @Override
     public String generarReporteDePacientes() {
+        //TODO: implementar este método usando streams y programación funcional
         return null;
     }
 
@@ -58,11 +62,15 @@ public class GeneradorDeReportes implements IGeneradorDeReportes {
         return null;
     }
 
-    private String aplicarPlantillaDeReporteDeMedicos(List<Medico> datos){
-        StringBuilder reporte = new StringBuilder("-- LISTADO DE MÉDICOS --\n------------------\n|   Nombre   | Especialidad |\n");
+    private String aplicarPlantillaDeReporteDeMedicos(final List<Medico> datos){
+        StringBuilder reporte = new StringBuilder("-- LISTADO DE MÉDICOS --\n")
+                .append("------------------\n")
+                .append("|   Nombre   | Especialidad |\n");
 
-        for(Medico m : datos){
-            reporte.append("| " + m.getNombre() + "  | " + m.getEspecialidad() + " |\n");
+        for (Medico m : datos) {
+            reporte.append("| ")
+                    .append(m.getNombre()).append(" | ")
+                    .append(m.getEspecialidad()).append(" |\n");
         }
 
         reporte.append("---------------------------------\n");
