@@ -57,7 +57,7 @@ public class GeneradorDeReportes implements IGeneradorDeReportes {
     }
 
     @Override
-    public String generarReporteDePacientesPorGrupoSanguineo() {
+    public String generarReporteDePacientesPorGrupoSanguineo(final String grupoSanguineo) {
         //TODO: implementar este método usando streams y programación funcional
         return null;
     }
