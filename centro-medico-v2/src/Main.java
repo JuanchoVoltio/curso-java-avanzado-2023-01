@@ -1,3 +1,4 @@
+import modelo.impl.Enfermera;
 import modelo.impl.Medico;
 import modelo.impl.Paciente;
 import persistencia.IObjetoDeAcessoADatos;
@@ -22,5 +23,11 @@ public class Main {
 
         System.out.println(baseDeDatos.guardarPaciente(paciente1));
         System.out.println(baseDeDatos.guardarPaciente(paciente2));
+
+        Enfermera enfermera1 = new Enfermera("456", "Enfermera", "655-555-555");
+        Enfermera enfermera2 = new Enfermera("456", "Enfermera", "655-555-555");
+
+        System.out.println(baseDeDatos.guardarEnfermera(enfermera1));
+        System.out.println(baseDeDatos.guardarEnfermera(enfermera2));
     }
 }
