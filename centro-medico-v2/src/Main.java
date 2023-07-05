@@ -8,7 +8,7 @@ import persistencia.impl.ObjetoDeAccesoADatos;
 public class Main {
     public static void main(String[] args) {
         probarBaseDeDatos();
-        probarBaseDeDatosConPacientes();
+        probarReportesDePacientes();
     }
 
     public static void probarBaseDeDatos(){
@@ -28,8 +28,7 @@ public class Main {
         System.out.println(generadorDeReportes.generarReporteDeMedicosPorEspecialidad(Medico.ESPECIALIDAD_GENERALISTA));
     }
 
-    public static void probarBaseDeDatosConPacientes(){
-        //En esta prueba esperamos que no se puedan guardar registros duplicados.
+    public static void probarReportesDePacientes(){
         IObjetoDeAcessoADatos baseDeDatos = new ObjetoDeAccesoADatos();
         IGeneradorDeReportes generadorDeReportes = new GeneradorDeReportes(baseDeDatos);
 
