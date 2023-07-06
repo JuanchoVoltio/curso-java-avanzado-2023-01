@@ -3,22 +3,27 @@ package persistencia.impl;
 import modelo.impl.Enfermera;
 import modelo.impl.Medico;
 import modelo.impl.Paciente;
+import modelo.impl.Paramedico;
 import persistencia.IObjetoDeAcessoADatos;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 public class ObjetoDeAccesoADatos implements IObjetoDeAcessoADatos {
 
-    private List<Medico> medicos = new ArrayList<>();
-    private List<Paciente> pacientes = new ArrayList<>();
-    private Set<Enfermera> enfermeras = new HashSet<>();
+    private final List<Medico> medicos = new ArrayList<>();
+    private final List<Paciente> pacientes = new ArrayList<>();
+    private final Set<Enfermera> enfermeras = new HashSet<>();
+    private final List<Paramedico> paramedicos = new ArrayList<>();
 
 
     @Override
-    public boolean guardarMedico(Medico m){
+    public boolean guardarMedico(final Medico m) {
         boolean respuesta = false;
 
-        if(!this.medicos.contains(m)){
+        if (!this.medicos.contains(m)) {
             this.medicos.add(m);
             respuesta = true;
         }
@@ -26,8 +31,8 @@ public class ObjetoDeAccesoADatos implements IObjetoDeAcessoADatos {
         return respuesta;
 
 //        Implementación básica usando ciclos.
-//        for (Medico medicoActual : this.medicos){
-//            if(medicoActual.equals(m)){
+//        for (Medico medicoActual : this.medicos) {
+//            if (medicoActual.equals(m)) {
 //                return false;
 //            }
 //        }
@@ -38,20 +43,30 @@ public class ObjetoDeAccesoADatos implements IObjetoDeAcessoADatos {
     }
 
     @Override
-    public boolean guardarPaciente(Paciente p) {
-        boolean respuesta = false;
-
-        if(!this.pacientes.contains(p)){
+    public boolean guardarPaciente(final Paciente p) {
+        if (!this.pacientes.contains(p)) {
             this.pacientes.add(p);
-            respuesta = true;
+            return true;
         }
-
-        return respuesta;
+        return false;
     }
 
     @Override
-    public boolean guardarEnfermera(Enfermera e) {
+    public boolean guardarEnfermera(final Enfermera e) {
         //TODO: Implementar usando Set en vez de List
+        if (!this.enfermeras.contains(e)) {
+            this.enfermeras.add(e);
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean guardarParamedico(final Paramedico pm) {
+        if (!this.paramedicos.contains(pm)) {
+            this.paramedicos.add(pm);
+            return true;
+        }
         return false;
     }
 
@@ -68,5 +83,10 @@ public class ObjetoDeAccesoADatos implements IObjetoDeAcessoADatos {
     @Override
     public List<Enfermera> consultarEnfermeras() {
         return List.copyOf(this.enfermeras);
+    }
+
+    @Override
+    public List<Paramedico> consultarParamedicos() {
+        return List.copyOf(this.paramedicos);
     }
 }
