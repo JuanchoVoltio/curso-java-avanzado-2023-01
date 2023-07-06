@@ -1,5 +1,6 @@
 import logica.IGeneradorDeReportes;
 import logica.impl.GeneradorDeReportes;
+import modelo.impl.Enfermera;
 import modelo.impl.Medico;
 import persistencia.IObjetoDeAcessoADatos;
 import persistencia.impl.ObjetoDeAccesoADatos;
@@ -7,6 +8,7 @@ import persistencia.impl.ObjetoDeAccesoADatos;
 public class Main {
     public static void main(String[] args) {
         probarBaseDeDatosConMedicos();
+        probarBaseDeDatosConEnfermeras();
     }
 
     public static void probarBaseDeDatosConMedicos(){
@@ -30,5 +32,10 @@ public class Main {
         //En esta prueba esperamos que no se puedan guardar registros duplicados.
         IObjetoDeAcessoADatos baseDeDatos = new ObjetoDeAccesoADatos();
 
+        Enfermera enfermera1 = new Enfermera("456", "Enfermera", "655-555-555");
+        Enfermera enfermera2 = new Enfermera("456", "Enfermera", "655-555-555");
+
+        System.out.println(baseDeDatos.guardarEnfermera(enfermera1));
+        System.out.println(baseDeDatos.guardarEnfermera(enfermera2));
     }
 }
