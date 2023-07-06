@@ -5,15 +5,13 @@ import modelo.impl.Medico;
 import modelo.impl.Paciente;
 import persistencia.IObjetoDeAcessoADatos;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 
 public class ObjetoDeAccesoADatos implements IObjetoDeAcessoADatos {
 
     private List<Medico> medicos = new ArrayList<>();
     private List<Paciente> pacientes = new ArrayList<>();
-    private List<Enfermera> enfermeras = new ArrayList<>();
+    private Set<Enfermera> enfermeras = new HashSet<>();
 
 
     @Override

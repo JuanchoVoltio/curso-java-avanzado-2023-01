@@ -6,10 +6,10 @@ import persistencia.impl.ObjetoDeAccesoADatos;
 
 public class Main {
     public static void main(String[] args) {
-        probarBaseDeDatos();
+        probarBaseDeDatosConMedicos();
     }
 
-    public static void probarBaseDeDatos(){
+    public static void probarBaseDeDatosConMedicos(){
         //En esta prueba esperamos que no se puedan guardar registros duplicados.
         IObjetoDeAcessoADatos baseDeDatos = new ObjetoDeAccesoADatos();
         IGeneradorDeReportes generadorDeReportes = new GeneradorDeReportes(baseDeDatos);
@@ -24,5 +24,11 @@ public class Main {
         System.out.println(generadorDeReportes.generarReporteDeMedicos());
 
         System.out.println(generadorDeReportes.generarReporteDeMedicosPorEspecialidad(Medico.ESPECIALIDAD_GENERALISTA));
+    }
+
+    public static void probarBaseDeDatosConEnfermeras(){
+        //En esta prueba esperamos que no se puedan guardar registros duplicados.
+        IObjetoDeAcessoADatos baseDeDatos = new ObjetoDeAccesoADatos();
+
     }
 }
