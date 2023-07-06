@@ -2,9 +2,13 @@ package logica.impl;
 
 import logica.IGeneradorDeReportes;
 import modelo.impl.Medico;
+import modelo.impl.Paciente;
 import persistencia.IObjetoDeAcessoADatos;
 
+import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 import java.util.stream.Collectors;
 
 public class GeneradorDeReportes implements IGeneradorDeReportes {
@@ -59,8 +63,28 @@ public class GeneradorDeReportes implements IGeneradorDeReportes {
 
     @Override
     public String generarReporteMediasDeEdadDePacienteAgrupadoPorGrupoSanguineo() {
-        //TODO: implementar este método usando streams y programación funcional
-        return "";
+        final LocalDate now = LocalDate.now();
+        Map<String, Double> datos = baseDeDatos.consultarPacientes()
+                .stream()
+                .collect(Collectors.groupingBy(
+                        // Agrupamos por grupo sanguíneo
+                        Paciente::getGrupoSanguineo,
+                        // En un TreeMap para ordenar las claves por su orden natural
+                        () -> new TreeMap<>(String.CASE_INSENSITIVE_ORDER),
+                        // ejecutando la función de grupo AVG sobre el atributo edad
+                        Collectors.averagingDouble(p -> p.getEdad(now))));
+        StringBuilder reporte = new StringBuilder(
+                "-- LISTADO DE EDADES PROMEDIO DE PACIENTES PARA CADA GRUPO SANGUÍNEO --\n")
+                .append("-----------------------------------------------------------------------\n")
+                .append("| Grupo sanguíneo |  Media de edad  |\n");
+
+        for(Map.Entry<String, Double> entry : datos.entrySet()){
+            reporte.append(String.format("| %15s | %15.2f |%n", entry.getKey(), entry.getValue()));
+        }
+
+        reporte.append("-----------------------------------------------------------------------\n");
+
+        return reporte.toString();
     }
 
     private String aplicarPlantillaDeReporteDeMedicos(List<Medico> datos){
