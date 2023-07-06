@@ -4,7 +4,6 @@ import logica.IGeneradorDeReportes;
 import modelo.impl.Medico;
 import persistencia.IObjetoDeAcessoADatos;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -56,6 +55,12 @@ public class GeneradorDeReportes implements IGeneradorDeReportes {
     public String generarReporteDePacientesPorGrupoSanguineo() {
         //TODO: implementar este método usando streams y programación funcional
         return null;
+    }
+
+    @Override
+    public String generarReporteMediasDeEdadDePacienteAgrupadoPorGrupoSanguineo() {
+        //TODO: implementar este método usando streams y programación funcional
+        return "";
     }
 
     private String aplicarPlantillaDeReporteDeMedicos(List<Medico> datos){
