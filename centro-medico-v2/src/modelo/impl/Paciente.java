@@ -19,14 +19,17 @@ public class Paciente extends Persona implements IPaciente {
         setGrupoSanguineo(grupoSanguineo);
     }
 
+    @Override
     public long getEdad() {
         return getEdad(LocalDate.now());
     }
 
+    @Override
     public long getEdad(final LocalDate nowReference) {
         return ChronoUnit.YEARS.between(getFechaNacimiento(), nowReference);
     }
 
+    @Override
     public LocalDate getFechaNacimiento() {
         return fechaNacimiento;
     }
@@ -34,6 +37,7 @@ public class Paciente extends Persona implements IPaciente {
         this.fechaNacimiento = fechaNacimiento;
     }
 
+    @Override
     public String getGrupoSanguineo() {
         return grupoSanguineo;
     }
