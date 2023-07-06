@@ -5,6 +5,7 @@ import modelo.Persona;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
+import java.util.Objects;
 
 public class Paciente extends Persona implements IPaciente {
 
@@ -39,6 +40,19 @@ public class Paciente extends Persona implements IPaciente {
 
     public void setGrupoSanguineo(String grupoSanguineo) {
         this.grupoSanguineo = !grupoSanguineo.isBlank() ? grupoSanguineo : "N/A";
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Paciente)) return false;
+        if (!super.equals(o)) return false;
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode());
     }
 
     @Override
