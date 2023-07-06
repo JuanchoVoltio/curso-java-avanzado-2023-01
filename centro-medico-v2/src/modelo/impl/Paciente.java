@@ -3,13 +3,34 @@ package modelo.impl;
 import modelo.IPaciente;
 import modelo.Persona;
 
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+
 public class Paciente extends Persona implements IPaciente {
 
+    private LocalDate fechaNacimiento;
     private String grupoSanguineo;
 
-    public Paciente(String dni, String nombre, String telefono, String grupoSanguineo) {
+    public Paciente(final String dni, final String nombre, final String telefono,
+                    final LocalDate fechaNacimiento, final String grupoSanguineo) {
         super(dni, nombre, telefono);
+        setFechaNacimiento(fechaNacimiento);
         setGrupoSanguineo(grupoSanguineo);
+    }
+
+    public long getEdad() {
+        return getEdad(LocalDate.now());
+    }
+
+    public long getEdad(final LocalDate nowReference) {
+        return ChronoUnit.YEARS.between(getFechaNacimiento(), nowReference);
+    }
+
+    public LocalDate getFechaNacimiento() {
+        return fechaNacimiento;
+    }
+    public void setFechaNacimiento(final LocalDate fechaNacimiento) {
+        this.fechaNacimiento = fechaNacimiento;
     }
 
     public String getGrupoSanguineo() {
@@ -18,5 +39,17 @@ public class Paciente extends Persona implements IPaciente {
 
     public void setGrupoSanguineo(String grupoSanguineo) {
         this.grupoSanguineo = !grupoSanguineo.isBlank() ? grupoSanguineo : "N/A";
+    }
+
+    @Override
+    public String toString() {
+        return "Paciente{" +
+                "dni='" + getDni() + '\'' +
+                ", nombre='" + getNombre() + '\'' +
+                ", telefono='" + getTelefono() + '\'' +
+                ", fechaNacimiento='" + getFechaNacimiento() + '\'' +
+                ", edad='" + getEdad() + '\'' +
+                ", grupoSanguineo='" + getGrupoSanguineo() + '\'' +
+                '}';
     }
 }
