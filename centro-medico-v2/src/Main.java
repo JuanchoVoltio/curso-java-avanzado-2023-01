@@ -70,5 +70,8 @@ public class Main {
 
         System.out.printf("Hay %d pacientes en el sistema.%n", baseDeDatos.consultarPacientes().stream().count());
         baseDeDatos.consultarPacientes().forEach(System.out::println);
+
+        final String reporte = generadorDeReportes.generarReporteMediasDeEdadDePacienteAgrupadoPorGrupoSanguineo();
+        publicadorDeReportes.publicarReporte(reporte);
     }
 }
