@@ -43,7 +43,7 @@ public class Paciente extends Persona implements IPaciente {
     }
 
     public void setGrupoSanguineo(String grupoSanguineo) {
-        this.grupoSanguineo = !grupoSanguineo.isBlank() ? grupoSanguineo : "N/A";
+        this.grupoSanguineo = grupoSanguineo != null && !grupoSanguineo.isBlank() ? grupoSanguineo : "N/A";
     }
 
     @Override
