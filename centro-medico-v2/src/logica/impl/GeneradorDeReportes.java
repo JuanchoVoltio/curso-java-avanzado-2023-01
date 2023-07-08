@@ -78,7 +78,7 @@ public class GeneradorDeReportes implements IGeneradorDeReportes {
                 .append("-----------------------------------------------------------------------\n")
                 .append("| Grupo sanguíneo |  Media de edad  |\n");
 
-        for(Map.Entry<String, Double> entry : datos.entrySet()){
+        for (Map.Entry<String, Double> entry : datos.entrySet()) {
             reporte.append(String.format("| %15s | %15.2f |%n", entry.getKey(), entry.getValue()));
         }
 
