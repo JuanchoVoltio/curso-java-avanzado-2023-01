@@ -11,8 +11,8 @@ public class Medico extends ProfesionalDeLaSalud {
 
     private String especialidad;
 
-    public Medico(String dni, String nombre, String telefono, String especialidad) {
-        super(dni, nombre, telefono);
+    public Medico(String dni, String nombre, String telefono, Integer id, String especialidad) {
+        super(dni, nombre, telefono, id);
         setEspecialidad(especialidad);
     }
 
